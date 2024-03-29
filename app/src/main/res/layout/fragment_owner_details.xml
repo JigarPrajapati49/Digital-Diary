@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ownerProfilePresenter"
+            type="com.rayo.digitaldiary.ui.profile.OwnerProfilePresenter" />
+
+        <variable
+            name="ownerProfileData"
+            type="com.rayo.digitaldiary.ui.login.ScanQRData" />
+
+        <variable
+            name="countryCode"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp">
+
+        <TextView
+            android:id="@+id/tvLabelBusinessName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            term="@{@string/business_name}"
+            app:layout_constraintEnd_toStartOf="@+id/tvBusinessName"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            tools:text="@string/business_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvBusinessName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="end"
+            android:text="@{ownerProfileData.businessName}"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelBusinessName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvLabelBusinessName" />
+
+        <View
+            android:id="@+id/viewDividerEmail"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBusinessName" />
+
+        <TextView
+            android:id="@+id/tvLabelEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            term="@{@string/email}"
+            tools:text="@string/email"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/tvEmail"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewDividerEmail" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="0dp"
+            android:layout_marginStart="10dp"
+            android:gravity="end"
+            android:layout_height="wrap_content"
+            android:text="@{ownerProfileData.ownerEmail}"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvLabelEmail" />
+
+        <View
+            android:id="@+id/viewDividerPhoneNumber"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEmail" />
+
+        <TextView
+            android:id="@+id/tvLabelPhoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            term="@{@string/phone_number}"
+            tools:text="@string/phone_number"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvPhoneNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewDividerPhoneNumber" />
+
+        <TextView
+            android:id="@+id/tvPhoneNumber"
+            android:layout_width="0dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelPhoneNumber"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@{(ownerProfileData.ownerContactNumber.empty == true)?`--`:countryCode+` `+ownerProfileData.ownerContactNumber}"
+            android:onClick="@{()->ownerProfilePresenter.onPhoneNumberClick(ownerProfileData.ownerContactNumber)}"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvLabelPhoneNumber" />
+
+        <View
+            android:id="@+id/viewDividerBusinessName"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

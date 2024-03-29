@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="textSizeSmall">14sp</dimen>
+    <dimen name="textSizeMedium">16sp</dimen>
+    <dimen name="textSizeMediumLarge">18sp</dimen>
+    <dimen name="textSizeTitle">18sp</dimen>
+    <dimen name="textSizeLarge">24sp</dimen>
+    <dimen name="radius">10dp</dimen>
+
+    <!-- dimen for guideline start-->
+    <dimen name="ownerStaffHistoryDimen1">0.26</dimen>
+    <dimen name="ownerStaffHistoryDimen2">0.54</dimen>
+    <dimen name="ownerStaffHistoryDimen3">0.78</dimen>
+
+    <dimen name="customerHistoryDimen1">0.30</dimen>
+    <dimen name="customerHistoryDimen2">0.65</dimen>
+
+    <dimen name="productDimen1">0.50</dimen>
+    <dimen name="productDimen2">0.80</dimen>
+
+    <dimen name="staffDimen1">0.60</dimen>
+
+    <dimen name="customerDimen1">0.30</dimen>
+    <dimen name="customerDimen2">0.65</dimen>
+
+    <dimen name="historyDetailDimen1">0.35</dimen>
+    <dimen name="historyDetailDimen2">0.55</dimen>
+    <dimen name="historyDetailDimen3">0.75</dimen>
+
+    <dimen name="paymentDetailDimen1">0.22</dimen>
+    <dimen name="paymentDetailDimen2">0.50</dimen>
+    <dimen name="paymentDetailDimen3">0.80</dimen>
+    <!-- dimen for guideline end -->
+</resources>

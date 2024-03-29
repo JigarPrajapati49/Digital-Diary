@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.rayo.digitaldiary.ui.product.AddProductPresenter" />
+
+        <variable
+            name="productData"
+            type="com.rayo.digitaldiary.ui.product.Product" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <TextView
+            android:id="@+id/addProductTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            term="@{(productData.id.empty == true)?@string/add_product:@string/update_product}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textSizeLarge"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Add Product" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputProductName"
+            style="@style/textInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            hintString="@{@string/product_name}"
+            tools:hint="@string/product_name"
+            android:longClickable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addProductTitle"
+            app:startIconDrawable="@drawable/ic_product_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etProductName"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName|textCapWords"
+                android:text="@={productData.name}"
+                android:textColorHint="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner"
+            style="@style/SpinnerStyle"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:drawableStart="@drawable/ic_spinner_arrow"
+            android:imeOptions="actionNext"
+            android:overlapAnchor="false"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toStartOf="@id/inputWeight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputProductName" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputWeight"
+            style="@style/textInputLayoutStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            hintString="@{@string/weight}"
+            tools:hint="@string/weight"
+            android:longClickable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/spinner"
+            app:layout_constraintTop_toBottomOf="@id/inputProductName"
+            app:startIconDrawable="@drawable/ic_product_unit"
+            app:suffixTextColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etWeight"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="4"
+                android:text="@={productData.weight}"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputPriceName"
+            style="@style/textInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            hintString="@{@string/price}"
+            tools:hint="@string/price"
+            android:longClickable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputWeight"
+            app:startIconDrawable="@drawable/ic_currency"
+            app:suffixText="@{currencySymbol}"
+            app:suffixTextColor="@color/colorPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPriceName"
+                style="@style/edittextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:maxLength="5"
+                android:inputType="numberDecimal"
+                android:text="@={productData.price}"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvProductStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            term="@{@string/product_status}"
+            tools:text="@string/product_status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputPriceName" />
+
+        <RadioGroup
+            android:id="@+id/rgProductStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvProductStatus">
+
+            <RadioButton
+                android:id="@+id/radioActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{(productData.active == 1)?true:false}"
+                term="@{@string/active}"
+                tools:text="@string/active"
+                app:buttonTint="@color/colorPrimary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioInactive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:checked="@{(productData.active == 0)?true:false}"
+                term="@{@string/inactive}"
+                tools:text="@string/inactive"
+                app:buttonTint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/radioActive"
+                app:layout_constraintStart_toEndOf="@id/radioActive"
+                app:layout_constraintTop_toTopOf="@id/radioActive" />
+
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancel"
+            style="@style/ButtonOutlineStyle"
+            android:layout_width="0dp"
+            android:layout_marginEnd="4dp"
+            android:onClick="@{() -> presenter.onCancelClick()}"
+            term="@{@string/cancel}"
+            tools:text="@string/cancel"
+            app:layout_constraintEnd_toStartOf="@id/btnAdd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rgProductStatus" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAdd"
+            style="@style/ButtonFilledElevatedStyle"
+            android:layout_width="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="4dp"
+            android:onClick="@{() -> presenter.onAddProductClick(productData)}"
+            term="@{(productData.id.empty == true)?@string/add:@string/update}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnCancel"
+            app:layout_constraintTop_toTopOf="@id/btnCancel"
+            tools:text="Add" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

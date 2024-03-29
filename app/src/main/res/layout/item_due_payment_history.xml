@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="duePaymentData"
+            type="com.rayo.digitaldiary.ui.payment.DuePaymentData" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/tvMonthYear"
+            android:text="@{duePaymentData.monthYear}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="January 2023"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDueAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="$ 500"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{currencySymbol+` `+duePaymentData.dueAmount}"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

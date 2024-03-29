@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="orderData"
+            type="com.rayo.digitaldiary.ui.order.OrderData" />
+
+        <variable
+            name="createOrderPresenter"
+            type="com.rayo.digitaldiary.ui.order.OrderConfirmationPresenter" />
+
+        <variable
+            name="customerName"
+            type="String" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+
+        <variable
+            name="productAdapter"
+            type="com.rayo.digitaldiary.ui.history.OwnerOrStaffDetailAdapter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.order.OrderConfirmationDialogFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="@drawable/dialog_background"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txtConfirmOrderTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                term="@{@string/confirm_order_details}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteY="18dp"
+                tools:text="Confirm Order Details" />
+
+            <TextView
+                android:id="@+id/txtLabelOrderDate"
+                term="@{@string/date}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtConfirmOrderTitle"
+                tools:text="Date" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/historyDetailDimen1" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/historyDetailDimen2" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="@dimen/historyDetailDimen3" />
+
+            <TextView
+                android:id="@+id/txtOrderDate"
+                date="@{orderData.orderDate}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/txtLabelOrderDate"
+                tools:text="03-05-2023" />
+
+            <TextView
+                android:id="@+id/txtLabelCustomerName"
+                term="@{@string/customer_name}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtOrderDate"
+                tools:text="Customer Name" />
+
+            <TextView
+                android:id="@+id/txtCustomerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{customerName}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/txtLabelCustomerName"
+                tools:text="Meet" />
+
+            <TextView
+                android:id="@+id/txtTotalOrderAmountLabel"
+                term="@{@string/order_amount}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCustomerName"
+                tools:text="Total order amount" />
+
+            <TextView
+                android:id="@+id/tvPriceSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{currencySymbol}"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@id/txtTotalOrderAmount"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/txtTotalOrderAmount"
+                tools:text="$" />
+
+            <TextView
+                android:id="@+id/txtTotalOrderAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{orderData.orderAmount}"
+                android:textColor="@color/black"
+                android:layout_marginStart="4dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPriceSymbol"
+                app:layout_constraintTop_toTopOf="@id/txtTotalOrderAmountLabel"
+                tools:text="150" />
+
+
+            <TextView
+                android:id="@+id/txtNoteLabel"
+                term="@{@string/note}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:visibility="@{(orderData.note.empty == true)?View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/txtTotalOrderAmount"
+                tools:text="Note" />
+
+            <TextView
+                android:id="@+id/txtNote"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{orderData.note}"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="@{(orderData.note.empty == true)?View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/txtNoteLabel"
+                tools:text="Test Note" />
+
+            <TextView
+                android:id="@+id/txtProductDetailsLabel"
+                term="@{@string/product_details}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtNote"
+                tools:text="Product Details" />
+
+            <TextView
+                android:id="@+id/txtProductLabel"
+                term="@{@string/product}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guide40"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtProductDetailsLabel"
+                tools:text="Product" />
+
+            <TextView
+                android:id="@+id/txtQuantityLabel"
+                term="@{@string/quantity}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guide60"
+                app:layout_constraintStart_toEndOf="@id/guide40"
+                app:layout_constraintTop_toBottomOf="@+id/txtProductDetailsLabel"
+                app:layout_constraintTop_toTopOf="@+id/txtProductLabel"
+                tools:text="Quantity" />
+
+            <TextView
+                android:id="@+id/txtUnitLabel"
+                term="@{@string/weight}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guide80"
+                app:layout_constraintStart_toStartOf="@id/guide60"
+                app:layout_constraintTop_toTopOf="@id/txtQuantityLabel"
+                tools:text="Weight" />
+
+            <TextView
+                android:id="@+id/txtOrderAmountLabel"
+                term="@{@string/order_amount}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guide80"
+                app:layout_constraintTop_toTopOf="@id/txtUnitLabel"
+                tools:text="Order Amount" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="txtProductLabel,txtQuantityLabel,txtUnitLabel,txtOrderAmountLabel" />
+
+            <View
+                android:id="@+id/view"
+                style="@style/dividerViewStyle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:adapter="@{productAdapter}"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/btnCancel"
+                app:layout_constraintTop_toBottomOf="@id/view"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_order_product" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/cancel}"
+                android:layout_width="0dp"
+                android:layout_marginEnd="4dp"
+                android:onClick="@{() -> createOrderPresenter.onCancelClick()}"
+                app:layout_constraintEnd_toStartOf="@id/btnConfirm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerView"
+                tools:text="Cancel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnConfirm"
+                style="@style/ButtonFilledElevatedStyle"
+                term="@{@string/confirm}"
+                android:layout_width="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="0dp"
+                android:onClick="@{() -> createOrderPresenter.onConfirmOrderClick(orderData)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnCancel"
+                app:layout_constraintTop_toTopOf="@id/btnCancel"
+                tools:text="Confirm" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

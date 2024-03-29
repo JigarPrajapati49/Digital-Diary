@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="staffWithPayment"
+            type="com.rayo.digitaldiary.database.StaffWithPayment" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+
+        <variable
+            name="isCustomer"
+            type="Boolean" />
+
+        <variable
+            name="businessOwnerName"
+            type="String" />
+
+        <variable
+            name="mainActivityPresenter"
+            type="com.rayo.digitaldiary.ui.customer.CustomerMainActivityPresenter" />
+
+        <variable
+            name="notificationDataPresenter"
+            type="com.rayo.digitaldiary.baseClasses.BaseInterface" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="@drawable/dialog_background"
+            android:padding="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/txtNotificationInformation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                term="@{isCustomer?@string/payment_details:@string/payment_received}"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtCreatedByLabel"
+                term="@{@string/created_at}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtNotificationInformation"
+                tools:text="Created at" />
+
+            <TextView
+                android:id="@+id/txtCreatedByName"
+                dateTime="@{staffWithPayment.paymentData.createdAt}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/txtCreatedByLabel"
+                tools:text="03-05-2023 01:15 AM" />
+
+            <TextView
+                android:id="@+id/txtSomething"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                term="@{@string/added_by}"
+                tools:text="@string/added_by"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCreatedByName" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{(staffWithPayment.staffData==null)?businessOwnerName:staffWithPayment.staffData.name}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@id/txtSomething"
+                tools:text="Something" />
+
+
+            <TextView
+                android:id="@+id/tvCustomerLabel"
+                term="@{@string/customer}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtSomething"
+                tools:text="Customer" />
+
+
+            <TextView
+                android:id="@+id/txtCustomerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{(staffWithPayment.staffData==null)?businessOwnerName:staffWithPayment.customerData.name}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvCustomerLabel"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/tvCustomerLabel"
+                tools:text="Jigar" />
+
+            <TextView
+                android:id="@+id/txtAmountLabel"
+                term="@{@string/amount}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCustomerName"
+                tools:text="Amount" />
+
+            <TextView
+                android:id="@+id/txtCurrency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{currencySymbol}"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/txtAmountLabel"
+                tools:text="$" />
+
+
+            <TextView
+                android:id="@+id/txtAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="@{staffWithPayment.paymentData.amount}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtCurrency"
+                app:layout_constraintTop_toTopOf="@id/txtAmountLabel"
+                tools:text="80" />
+
+            <TextView
+                android:id="@+id/txtPaymentModelLabel"
+                term="@{@string/payment_mode}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtAmount"
+                tools:text="Payment Mode" />
+
+            <TextView
+                android:id="@+id/txtPaymentMode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                term="@{staffWithPayment.paymentData.modeOfPayment.toLowerCase()}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/txtPaymentModelLabel"
+                tools:text="Cash" />
+
+            <TextView
+                android:id="@+id/txtNotesLabel"
+                term="@{@string/note}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:visibility="@{staffWithPayment.paymentData.note.empty?View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPaymentMode"
+                tools:text="Note" />
+
+            <TextView
+                android:id="@+id/txtNotes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{staffWithPayment.paymentData.note}"
+                android:textColor="@color/black"
+                android:visibility="@{staffWithPayment.paymentData.note.empty?View.GONE:View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/txtNotesLabel"
+                tools:text="Note" />
+
+            <TextView
+                android:id="@+id/btnOk"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/ok}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:onClick="@{() -> mainActivityPresenter.onOkyClick()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtNotes"
+                tools:text="Oky" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

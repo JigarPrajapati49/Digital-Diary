@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="filterPresenter"
+            type="com.rayo.digitaldiary.ui.payment.PaymentFilterPresenter" />
+
+        <variable
+            name="customerAdapter"
+            type="com.rayo.digitaldiary.ui.order.SelectCustomerAdapter" />
+
+        <variable
+            name="isClearVisible"
+            type="Boolean" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+
+        <variable
+            name="selectedDate"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/dialog_background"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvProductTitle"
+                term="@{@string/filter}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSizeMedium"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/filter" />
+
+            <TextView
+                android:id="@+id/tvClearFilter"
+                term="@{@string/clear}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> filterPresenter.onClearFilterClick()}"
+                android:padding="4dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:visibility="@{isClearVisible?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tvProductTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvProductTitle"
+                tools:text="@string/clear" />
+
+            <TextView
+                android:id="@+id/tvPaymentDateRange"
+                term="@{@string/payment_date_range}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tvClearFilter"
+                tools:text="@string/payment_date_range" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputStartDate"
+                style="@style/textInputLayoutStyle"
+                hintString="@{@string/start_date}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:longClickable="false"
+                app:layout_constraintEnd_toStartOf="@+id/inputEndDate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPaymentDateRange"
+                app:startIconDrawable="@drawable/ic_calendar"
+                tools:hint="@string/start_date">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etStartDate"
+                    style="@style/edittextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:onClick="@{() -> filterPresenter.onStartDateClick()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputEndDate"
+                style="@style/textInputLayoutStyle"
+                hintString="@{@string/end_date}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:longClickable="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/inputStartDate"
+                app:layout_constraintTop_toBottomOf="@id/tvPaymentDateRange"
+                app:startIconDrawable="@drawable/ic_calendar"
+                tools:hint="@string/end_date">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEndDate"
+                    style="@style/edittextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:onClick="@{() -> filterPresenter.onEndDateClick()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <SearchView
+                android:id="@+id/searchCustomer"
+                searchTerm="@{@string/search}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:iconifiedByDefault="false"
+                android:paddingStart="-16dp"
+                android:paddingEnd="-6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputStartDate" />
+
+            <TextView
+                android:id="@+id/tvCustomers"
+                term="@{@string/customer}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/searchCustomer"
+                tools:text="@string/customer" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCustomerList"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
+                android:adapter="@{customerAdapter}"
+                android:orientation="vertical"
+                android:overScrollMode="never"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/btnCancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCustomers"
+                tools:itemCount="15"
+                tools:listitem="@layout/item_select_customer" />
+
+            <TextView
+                android:id="@+id/tvErrorMessage"
+                style="@style/errorMessageStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{errorMessage}"
+                app:layout_constraintBottom_toTopOf="@id/btnCancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCustomers" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/cancel}"
+                android:layout_width="0dp"
+                android:layout_marginEnd="4dp"
+                android:onClick="@{() -> filterPresenter.onCancelClick()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnSelect"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="@string/cancel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSelect"
+                style="@style/ButtonFilledElevatedStyle"
+                term="@{@string/apply}"
+                android:layout_width="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="@{() -> filterPresenter.onApplyClick()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnCancel"
+                app:layout_constraintTop_toTopOf="@id/btnCancel"
+                tools:text="Apply" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

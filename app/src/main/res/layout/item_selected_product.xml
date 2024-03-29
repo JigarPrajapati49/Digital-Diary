@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="productData"
+            type="com.rayo.digitaldiary.ui.product.Product" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+
+        <variable
+            name="isLastPosition"
+            type="Boolean" />
+
+        <variable
+            name="currentPosition"
+            type="Integer" />
+
+        <variable
+            name="createOrderPresenter"
+            type="com.rayo.digitaldiary.ui.order.CreateOrderPresenter" />
+
+        <variable
+            name="productUnit"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/tvProductName"
+            term="@{productData.name +` - `+productData.weight+` `+productUnit}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guid42"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Milk" />
+
+        <TextView
+            android:id="@+id/tvPriceSymbol"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@{currencySymbol}"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guid42"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$" />
+
+
+        <TextView
+            android:id="@+id/txtPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{productData.price}"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guid60"
+            app:layout_constraintStart_toEndOf="@+id/tvPriceSymbol"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="80000" />
+
+        <ImageView
+            android:id="@+id/imgRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> createOrderPresenter.onRemoveQuantityClick(currentPosition)}"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_remove"
+            app:layout_constraintEnd_toStartOf="@id/etQuantity"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guid60"
+            app:layout_constraintTop_toTopOf="@+id/etQuantity" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxEms="3"
+            android:maxLength="3"
+            android:minEms="3"
+            windowSoftInputMode="adjustPan"
+            android:text="@={productData.quantity}"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgRemove"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="5" />
+
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:onClick="@{() -> createOrderPresenter.onAddQuantityClick(currentPosition)}"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/etQuantity"
+            app:layout_constraintTop_toTopOf="@+id/etQuantity" />
+
+
+        <TextView
+            android:id="@+id/tvTotalPriceSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@{currencySymbol}"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvTotal"
+            app:layout_constraintStart_toEndOf="@+id/imgAdd"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="CDX" />
+
+
+        <TextView
+            android:id="@+id/tvTotal"
+            price="@{productData.price}"
+            quantity="@{productData.quantity}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvTotalPriceSymbol"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="8.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guid42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.37" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guid60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.52" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guid70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.70" />
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvProductName" />
+
+        <View
+            style="@style/dividerViewStyle"
+            android:layout_marginTop="12dp"
+            android:visibility="@{isLastPosition?View.GONE:View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

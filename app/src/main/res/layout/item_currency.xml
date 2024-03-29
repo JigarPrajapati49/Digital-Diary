@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="currencyData"
+            type="com.rayo.digitaldiary.ui.CurrencyData" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@{(currencyData.isSelected())?@color/colorSelectedBackground:@color/white}">
+
+        <TextView
+            android:id="@+id/tvCountryName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{currencyData.countryName + '('+currencySymbol+')'}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/radioSelectCurrency"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="USA" />
+
+        <RadioButton
+            android:id="@+id/radioSelectCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:buttonTint="@color/colorPrimary"
+            android:checked="@{currencyData.isSelected()}"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:checked="true" />
+
+        <View
+            android:id="@+id/viewDivider"
+            style="@style/dividerViewStyle"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCountryName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

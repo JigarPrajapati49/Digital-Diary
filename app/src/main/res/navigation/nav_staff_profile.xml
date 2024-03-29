@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuProfile"
+    app:startDestination="@id/staffProfileFragment">
+    <fragment
+        android:id="@+id/staffProfileFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.StaffProfileFragment"
+        android:label="@string/staff_profile"
+        tools:layout="@layout/fragment_staff_profile">
+        <action
+            android:id="@+id/action_staff_profile_to_staff_login_detail"
+            app:destination="@id/staffLoginDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/staffLoginDetailFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.SessionFragment"
+        android:label="staff_login_detail"
+        tools:layout="@layout/fragment_session" />
+</navigation>

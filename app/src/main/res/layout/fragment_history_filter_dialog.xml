@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.rayo.digitaldiary.helper.Constants" />
+
+        <variable
+            name="customerAdapter"
+            type="com.rayo.digitaldiary.ui.order.SelectCustomerAdapter" />
+
+        <variable
+            name="filterPresenter"
+            type="com.rayo.digitaldiary.ui.history.HistoryFilterPresenter" />
+
+        <variable
+            name="selectedOrderStatus"
+            type="String" />
+
+        <variable
+            name="isClearVisible"
+            type="Boolean" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="@drawable/dialog_background"
+            android:padding="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvProductTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                term="@{@string/filter}"
+                tools:text="@string/filter"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textSizeMedium"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvClearFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> filterPresenter.onClearFilterClick()}"
+                android:padding="4dp"
+                term="@{@string/clear}"
+                tools:text="@string/clear"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:visibility="@{isClearVisible?View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/tvProductTitle"
+                app:layout_constraintTop_toTopOf="@id/tvProductTitle" />
+
+            <TextView
+                android:id="@+id/tvPaymentStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                term="@{@string/order_status}"
+                tools:text="@string/order_status"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tvClearFilter" />
+
+            <RadioGroup
+                android:id="@+id/rgPaymentStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPaymentStatus">
+
+                <RadioButton
+                    android:id="@+id/radioAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimary"
+                    android:checked="@{selectedOrderStatus == Constants.ALL?true:false}"
+                    term="@{@string/all}"
+                    tools:text="@string/all" />
+
+                <RadioButton
+                    android:id="@+id/radioCompleted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimary"
+                    term="@{@string/completed}"
+                    android:checked="@{selectedOrderStatus == Constants.COMPLETED?true:false}"
+                    tools:text="@string/completed" />
+
+                <RadioButton
+                    android:id="@+id/radioCancelled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/colorPrimary"
+                    term="@{@string/cancelled}"
+                    android:checked="@{selectedOrderStatus == Constants.CANCELLED?true:false}"
+                    tools:text="@string/cancelled" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tvCustomers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                term="@{@string/customer}"
+                tools:text="@string/customer"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/searchCustomer" />
+
+            <SearchView
+                android:id="@+id/searchCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:iconifiedByDefault="false"
+                android:paddingStart="-16dp"
+                android:paddingEnd="-6dp"
+                searchTerm="@{@string/search}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rgPaymentStatus" />
+
+
+            <TextView
+                android:id="@+id/tvErrorMessage"
+                style="@style/errorMessageStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{errorMessage}"
+                app:layout_constraintBottom_toTopOf="@id/btnCancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCustomers" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCustomerList"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
+                android:adapter="@{customerAdapter}"
+                android:orientation="vertical"
+                android:paddingStart="8dp"
+                android:overScrollMode="never"
+                android:paddingEnd="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/btnCancel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCustomers"
+                tools:itemCount="15"
+                tools:listitem="@layout/item_select_customer" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
+                style="@style/ButtonOutlineStyle"
+                android:layout_width="0dp"
+                android:layout_marginEnd="4dp"
+                android:onClick="@{() -> filterPresenter.onCancelClick()}"
+                term="@{@string/cancel}"
+                tools:text="@string/cancel"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnSelect"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSelect"
+                style="@style/ButtonFilledElevatedStyle"
+                android:layout_width="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="@{() -> filterPresenter.onApplyClick()}"
+                term="@{@string/apply}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnCancel"
+                app:layout_constraintTop_toTopOf="@id/btnCancel"
+                tools:text="Apply" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

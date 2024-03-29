@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="customerData"
+            type="com.rayo.digitaldiary.ui.customer.CustomerData" />
+
+        <variable
+            name="countryCode"
+            type="String" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+
+        <variable
+            name="isShowDueAmount"
+            type="Boolean" />
+
+        <variable
+            name="presenter"
+            type="com.rayo.digitaldiary.ui.order.SelectCustomerPresenter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> presenter.onCustomerSelected(customerData)}"
+        android:background="@{(customerData.isCustomerSelected() == 1)?@color/colorSelectedBackground:@color/white}">
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{customerData.name}"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/tvCustomerPhoneNumber"
+            app:layout_constraintEnd_toStartOf="@id/radioSelectCustomer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Customer Name" />
+
+        <TextView
+            android:id="@+id/tvCustomerPhoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{(customerData.contactNumber.empty == true)?`--`:countryCode+` `+customerData.contactNumber}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@id/radioSelectCustomer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCustomerName"
+            tools:text="+91 8882593164" />
+
+        <TextView
+            android:id="@+id/tvDueAmountLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            term="@{(customerData.dueAmount &lt; 0)?@string/prepaid_amount:@string/due_amount}"
+            android:textColor="@color/black"
+            android:visibility="@{isShowDueAmount?View.VISIBLE:View.GONE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvDueAmount"
+            app:layout_constraintTop_toBottomOf="@id/tvCustomerPhoneNumber"
+            tools:text="Due Amount" />
+
+        <TextView
+            android:id="@+id/tvDueAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginStart="8dp"
+            dueAmount="@{customerData.dueAmount}"
+            currencySymbol="@{currencySymbol}"
+            android:visibility="@{isShowDueAmount?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toStartOf="@id/radioSelectCustomer"
+            app:layout_constraintStart_toEndOf="@id/tvDueAmountLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvCustomerPhoneNumber"
+            tools:text="$5" />
+
+        <RadioButton
+            android:id="@+id/radioSelectCustomer"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:buttonTint="@color/colorPrimary"
+            android:checked="@{customerData.isCustomerSelected() == 1}"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:checked="true" />
+
+        <View
+            style="@style/dividerViewStyle"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDueAmount" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

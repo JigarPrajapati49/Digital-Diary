@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="historyPresenter"
+            type="com.rayo.digitaldiary.ui.history.HistoryPresenter" />
+
+        <variable
+            name="orderHistoryAdapter"
+            type="com.rayo.digitaldiary.ui.history.OrderHistoryAdapter" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+
+        <variable
+            name="isNoOrderHistoryFound"
+            type="Boolean" />
+
+        <variable
+            name="summaryData"
+            type="com.rayo.digitaldiary.ui.history.HistorySummaryData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvTotalOrdersLabel"
+                term="@{@string/total_orders}"
+                android:text="@string/total_orders"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@id/tvTotalOrders"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTotalAmountLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                term="@{@string/total_amount}"
+                android:text="@string/total_amount"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@id/tvTotalAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalOrdersLabel" />
+
+            <TextView
+                android:id="@+id/tvTotalEarnedLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                term="@{@string/total_earned}"
+                android:text="@string/total_earned"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@id/tvTotalEarned"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalAmountLabel" />
+
+            <TextView
+                android:id="@+id/tvTotalOrders"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@{summaryData.totalOrders}"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTotalOrdersLabel"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@{summaryData.totalAmount}"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTotalAmountLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalOrdersLabel" />
+
+            <TextView
+                android:id="@+id/tvTotalEarned"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@{summaryData.totalEarned}"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTotalEarnedLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalAmountLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMonthSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/constraintSummary"
+            app:layout_goneMarginTop="0dp">
+
+            <ImageView
+                android:id="@+id/imgPrevMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> historyPresenter.onPreviousDateClick()}"
+                android:paddingStart="18dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_previous"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/tvMonthName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:onClick="@{() -> historyPresenter.onDateClick()}"
+                android:paddingStart="12dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imgNextMonth"
+                app:layout_constraintStart_toEndOf="@id/imgPrevMonth"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="03-12-2023" />
+
+            <ImageView
+                android:id="@+id/imgNextMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> historyPresenter.onNextDateClick()}"
+                android:paddingStart="12dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_next"
+                app:tint="@color/black" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/ownerStaffHistoryDimen1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/ownerStaffHistoryDimen2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/ownerStaffHistoryDimen3" />
+
+        <TextView
+            android:id="@+id/tvCreatedBy"
+            term="@{@string/created_by}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guide20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clMonthSwitch"
+            tools:text="@string/created_by" />
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+            term="@{@string/customer_name}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guide60"
+            app:layout_constraintStart_toEndOf="@id/guide20"
+            app:layout_constraintTop_toTopOf="@id/tvCreatedBy"
+            tools:text="@string/customer_name" />
+
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            term="@{@string/status}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guide85"
+            app:layout_constraintStart_toEndOf="@id/tvCustomerName"
+            app:layout_constraintTop_toTopOf="@id/tvCreatedBy"
+            tools:text="@string/status" />
+
+        <TextView
+            android:id="@+id/tvOrderAmount"
+            term="@{@string/order_amount}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guide85"
+            app:layout_constraintTop_toTopOf="@id/tvCreatedBy"
+            tools:text="@string/order_amount" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvCustomerName, tvCreatedBy, tvOrderAmount" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHistory"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:adapter="@{orderHistoryAdapter}"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:paddingBottom="?attr/actionBarSize"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            tools:listitem="@layout/item_owner_or_staff_history" />
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            style="@style/errorMessageStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{errorMessage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNoDataFount"
+            style="@style/errorMessageStyle"
+            term="@{@string/no_data_found}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{isNoOrderHistoryFound?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/no_data_found" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

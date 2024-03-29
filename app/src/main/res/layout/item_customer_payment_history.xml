@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="android.view.Gravity" />
+
+        <variable
+            name="paymentData"
+            type="com.rayo.digitaldiary.database.StaffWithPayment" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+
+        <variable
+            name="businessName"
+            type="String" />
+
+        <variable
+            name="isCustomerVisible"
+            type="Boolean" />
+
+        <variable
+            name="isStaffVisible"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:paddingTop="12dp"
+        android:clickable="true"
+        app:layout_optimizationLevel="none">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/paymentDetailDimen1" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/paymentDetailDimen3" />
+
+        <TextView
+            android:id="@+id/tvPaymentDate"
+            date="@{paymentData.paymentData.createdAt}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@id/guide1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/date" />
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{paymentData.customerData.name}"
+            android:textColor="@color/black"
+            android:textAlignment="@{isStaffVisible?View.TEXT_ALIGNMENT_TEXT_START:View.TEXT_ALIGNMENT_CENTER}"
+            tools:visibility="visible"
+            android:visibility="@{isCustomerVisible?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toStartOf="@id/tvGivenName"
+            app:layout_constraintStart_toEndOf="@id/guide1"
+            app:layout_constraintTop_toTopOf="@id/tvPaymentDate"
+            tools:text="@string/customer_name" />
+
+        <TextView
+            android:id="@+id/tvGivenName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{(paymentData.staffData == null)?businessName:paymentData.staffData.name}"
+            android:textColor="@color/black"
+            android:gravity="@{isCustomerVisible? Gravity.START: Gravity.CENTER}"
+            android:visibility="@{isStaffVisible?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toStartOf="@id/guide3"
+            tools:visibility="visible"
+            app:layout_constraintStart_toEndOf="@id/tvCustomerName"
+            app:layout_constraintTop_toTopOf="@id/tvPaymentDate"
+            tools:text="@string/given_name" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{currencySymbol+` `+paymentData.paymentData.amount}"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guide3"
+            app:layout_constraintTop_toTopOf="@id/tvPaymentDate"
+            tools:text="@string/amount" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/paymentBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvPaymentDate, tvCustomerName, tvGivenName, tvAmount" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/paymentBarrier" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

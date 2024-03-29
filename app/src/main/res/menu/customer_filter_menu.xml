@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/filterGroup"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/filterCreatedAt"
+            android:title="@string/created_at" />
+
+        <item
+            android:id="@+id/filterDueAmountFirst"
+            android:title="@string/completed" />
+
+        <item
+            android:id="@+id/filterDueAmountLast"
+            android:title="@string/completed" />
+
+        <item
+            android:id="@+id/filterAtoZ"
+            android:title="@string/cancelled" />
+
+        <item
+            android:id="@+id/filterZtoA"
+            android:title="@string/cancelled" />
+
+    </group>
+</menu>

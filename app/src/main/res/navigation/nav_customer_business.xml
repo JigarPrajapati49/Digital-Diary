@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/business"
+    app:startDestination="@id/customerBusinessFragment">
+
+    <fragment
+        android:id="@+id/customerBusinessFragment"
+        android:name="com.rayo.digitaldiary.ui.customer.CustomerBusinessFragment"
+        android:label="@string/business"
+        tools:layout="@layout/fragment_customer_business">
+        <action
+            android:id="@+id/action_customerBusinessFragment_to_customerHistoryFragment"
+            app:destination="@id/customerHistoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/customerHistoryFragment"
+        android:name="com.rayo.digitaldiary.ui.history.CustomerHistoryFragment"
+        android:label="@string/customer_history"
+        tools:layout="@layout/fragment_customer_history">
+        <action
+            android:id="@+id/action_customerHistoryFragment_to_customerDetailsFragment"
+            app:destination="@id/customerDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ownerOrStaffOrderHistoryDetailFragment"
+        android:name="com.rayo.digitaldiary.ui.history.OwnerOrStaffHistoryDetailFragment"
+        android:label="Order History"
+        tools:layout="@layout/fragment_owner_or_staff_history_detail" />
+</navigation>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuDashboard"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.rayo.digitaldiary.ui.dashboard.DashboardFragment"
+        android:label="@string/dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_staffListingFragment"
+            app:destination="@id/staffListingFragment"
+            app:popUpTo="@id/dashboardFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/staffListingFragment"
+        android:name="com.rayo.digitaldiary.ui.staff.StaffListingFragment"
+        android:label="@string/staff"
+        tools:layout="@layout/fragment_staff_listing">
+        <action
+            android:id="@+id/action_staffListingFragment_to_staffDetailsFragment"
+            app:destination="@id/staffDetailsFragment"
+            app:popUpTo="@id/staffListingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/staffDetailsFragment"
+        android:name="com.rayo.digitaldiary.ui.staff.StaffDetailsFragment"
+        android:label="@string/staff"
+        tools:layout="@layout/fragment_staff_details">
+        <action
+            android:id="@+id/action_staffDetailsFragment_to_orderHistoryFragment"
+            app:destination="@id/ownerOrStaffOrderHistoryFragment"
+            app:popUpTo="@id/staffDetailsFragment" />
+        <action
+            android:id="@+id/action_staffDetailsFragment_to_sessionLoginFragment"
+            app:destination="@id/sessionFragment" />
+        <action
+            android:id="@+id/action_staffDetailsFragment_to_generateQrCodeFragment"
+            app:destination="@id/generateQrCodeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sessionFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.SessionFragment"
+        android:label="session_login_detail"
+        tools:layout="@layout/fragment_session" />
+
+    <fragment
+        android:id="@+id/generateQrCodeFragment"
+        android:name="com.rayo.digitaldiary.ui.customer.GenerateQrCodeFragment"
+        android:label="@string/generate_qr"
+        tools:layout="@layout/fragment_generate_qr_code" />
+
+    <fragment
+        android:id="@+id/customerListingFragment"
+        android:name="com.rayo.digitaldiary.ui.customer.CustomerListingFragment"
+        android:label="@string/customer"
+        tools:layout="@layout/fragment_customer_listing">
+        <action
+            android:id="@+id/action_customerListingFragment_to_customerDetailsFragment"
+            app:destination="@id/customerDetailsFragment"
+            app:popUpTo="@id/customerListingFragment" />
+        <action
+            android:id="@+id/action_customerListingFragment_to_customerHistoryFragment"
+            app:destination="@id/customerHistoryFragment"
+            app:popUpTo="@id/customerDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/customerDetailsFragment"
+        android:name="com.rayo.digitaldiary.ui.customer.CustomerDetailsFragment"
+        android:label="@string/customer"
+        tools:layout="@layout/fragment_customer_details">
+        <action
+            android:id="@+id/action_customerDetailsFragment_to_customerSessionLoginFragment"
+            app:destination="@id/sessionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createOrderFragment"
+        android:name="com.rayo.digitaldiary.ui.order.CreateOrderFragment"
+        android:label="@string/create_order"
+        tools:layout="@layout/fragment_create_order" />
+
+    <fragment
+        android:id="@+id/ownerOrStaffOrderHistoryFragment"
+        android:name="com.rayo.digitaldiary.ui.history.OwnerOrStaffHistoryFragment"
+        android:label="Order History"
+        tools:layout="@layout/fragment_owner_or_staff_history">
+        <action
+            android:id="@+id/action_ownerOrStaffOrderHistoryFragment_to_customerDetailsFragment"
+            app:destination="@id/customerDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/customerHistoryFragment"
+        android:name="com.rayo.digitaldiary.ui.history.CustomerHistoryFragment"
+        android:label="Order History"
+        tools:layout="@layout/fragment_customer_history" />
+
+    <fragment
+        android:id="@+id/ownerOrStaffOrderHistoryDetailFragment"
+        android:name="com.rayo.digitaldiary.ui.history.OwnerOrStaffHistoryDetailFragment"
+        android:label="Order History"
+        tools:layout="@layout/fragment_owner_or_staff_history_detail" />
+
+    <fragment
+        android:id="@+id/addPaymentFragment"
+        android:name="com.rayo.digitaldiary.ui.payment.AddPaymentFragment"
+        android:label="Add Transaction"
+        tools:layout="@layout/fragment_add_payment" />
+
+    <fragment
+        android:id="@+id/paymentHistoryFragment"
+        android:name="com.rayo.digitaldiary.ui.payment.CustomerPaymentHistoryFragment"
+        android:label="Transaction History"
+        tools:layout="@layout/fragment_customer_payment_history" />
+</navigation>

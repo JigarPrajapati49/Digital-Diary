@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="dashBoardAdapter"
+            type="com.rayo.digitaldiary.ui.dashboard.DashboardAdapter" />
+
+        <variable
+            name="presenter"
+            type="com.rayo.digitaldiary.ui.dashboard.DashboardPresenter" />
+
+        <variable
+            name="isVisible"
+            type="Boolean" />
+        <variable
+            name="isCreateOrderVisible"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
+        <TextView
+            android:id="@+id/tvSyncMessage"
+            term="@{@string/your_data_is_not_sync_tap_here}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:onClick="@{()-> presenter.onSyncClick()}"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:visibility="@{isVisible?View.VISIBLE:View.GONE, default = gone}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/your_data_is_not_sync_tap_here" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDashBoard"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:adapter="@{dashBoardAdapter}"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSyncMessage"
+            app:layout_constraintBottom_toTopOf="@+id/btnCreateOrder"
+            app:spanCount="2"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_dashboard" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCreateOrder"
+            style="@style/ButtonFilledElevatedStyle"
+            android:layout_width="0dp"
+            android:layout_marginEnd="18dp"
+            term="@{@string/create_order}"
+            android:visibility="@{isCreateOrderVisible?View.VISIBLE:View.GONE}"
+            android:onClick="@{()->presenter.onCreateOrderClick()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@string/create_order"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

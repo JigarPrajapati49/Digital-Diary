@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="productData"
+            type="com.rayo.digitaldiary.ui.product.Product" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+
+        <variable
+            name="presenter"
+            type="com.rayo.digitaldiary.ui.product.ProductPresenter" />
+
+        <variable
+            name="productUnit"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{()-> presenter.onProductClick(productData)}">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/productDimen1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/productDimen2" />
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{productData.name}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="@id/guide50"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product Name" />
+
+        <TextView
+            android:id="@+id/tvUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{productData.weight+` `+productUnit}"
+            android:textColor="@color/blackNormal"
+            app:layout_constraintBottom_toBottomOf="@id/tvProductName"
+            app:layout_constraintEnd_toStartOf="@id/guide80"
+            app:layout_constraintStart_toStartOf="@id/guide50"
+            app:layout_constraintTop_toTopOf="@id/tvProductName"
+            tools:text="100 g" />
+
+        <TextView
+            android:id="@+id/tvPriceSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{currencySymbol}"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@id/tvProductName"
+            app:layout_constraintStart_toStartOf="@id/guide80"
+            app:layout_constraintTop_toTopOf="@id/tvProductName"
+            tools:text="$" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@{productData.price}"
+            android:textColor="@color/blackNormal"
+            app:layout_constraintBottom_toBottomOf="@id/tvProductName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvPriceSymbol"
+            app:layout_constraintTop_toTopOf="@id/tvProductName"
+            tools:text="50000" />
+
+        <View
+            style="@style/dividerViewStyle"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvProductName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

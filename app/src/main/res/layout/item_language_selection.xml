@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="selectedLanguageData"
+            type="com.rayo.digitaldiary.ui.LanguageData" />
+
+        <variable
+            name="presenter"
+            type="com.rayo.digitaldiary.ui.settings.LanguageSelectionPresenter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{selectedLanguageData.radioCheck?@color/colorSelectedBackground:@color/white}"
+        android:onClick="@{()-> presenter.onLanguageSelect(selectedLanguageData)}"
+        android:paddingTop="12dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:text="@{selectedLanguageData.languageName}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@id/radioLanguageSelection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tvTranslatedTitle"
+            android:text="@{selectedLanguageData.languageTranslationName}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@id/radioLanguageSelection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="Title" />
+
+        <RadioButton
+            android:id="@+id/radioLanguageSelection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:checked="@{selectedLanguageData.radioCheck}"
+            android:clickable="false"
+            android:minHeight="0dp"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            style="@style/dividerViewStyle"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTranslatedTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

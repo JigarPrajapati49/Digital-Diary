@@ -1,0 +1,88 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuCustomers"
+    app:startDestination="@id/customerListingFragment">
+
+    <fragment
+        android:id="@+id/customerListingFragment"
+        android:name="com.rayo.digitaldiary.ui.customer.CustomerListingFragment"
+        android:label="@string/customers"
+        tools:layout="@layout/fragment_customer_listing">
+        <action
+            android:id="@+id/action_customerListingFragment_to_customerDetailsFragment"
+            app:destination="@id/customerDetailsFragment"
+            app:popUpTo="@id/customerListingFragment" />
+        <action
+            android:id="@+id/action_customerListingFragment_to_customerHistoryFragment"
+            app:destination="@id/customerHistoryFragment"
+            app:popUpTo="@id/customerDetailsFragment" />
+        <action
+            android:id="@+id/action_customerListingFragment_to_PaymentHistoryFragment"
+            app:destination="@id/paymentHistoryFragment"
+            app:popUpTo="@id/customerDetailsFragment" />
+        <action
+            android:id="@+id/action_customerListingFragment_to_AddPaymentFragment"
+            app:destination="@id/addPaymentFragment"
+            app:popUpTo="@id/paymentHistoryFragment" />
+        <action
+            android:id="@+id/action_customerListingFragment_to_CreateOrderFragment"
+            app:destination="@+id/createOrderFragment"
+            app:popUpTo="@id/customerDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/customerDetailsFragment"
+        android:name="com.rayo.digitaldiary.ui.customer.CustomerDetailsFragment"
+        android:label="@string/customer"
+        tools:layout="@layout/fragment_customer_details">
+        <action
+            android:id="@+id/action_customerDetailsFragment_to_customerSessionLoginFragment"
+            app:destination="@id/sessionFragment" />
+        <action
+            android:id="@+id/action_customerDetailsFragment_to_generateQrCodeFragment"
+            app:destination="@id/generateQrCodeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/customerHistoryFragment"
+        android:name="com.rayo.digitaldiary.ui.history.CustomerHistoryFragment"
+        android:label="Order History"
+        tools:layout="@layout/fragment_customer_history" />
+
+    <fragment
+        android:id="@+id/sessionFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.SessionFragment"
+        android:label="session_login_detail"
+        tools:layout="@layout/fragment_session" />
+
+    <fragment
+        android:id="@+id/paymentHistoryFragment"
+        android:name="com.rayo.digitaldiary.ui.payment.CustomerPaymentHistoryFragment"
+        android:label="Transaction History"
+        tools:layout="@layout/fragment_customer_payment_history" />
+
+    <fragment
+        android:id="@+id/addPaymentFragment"
+        android:name="com.rayo.digitaldiary.ui.payment.AddPaymentFragment"
+        android:label="Add Payment"
+        tools:layout="@layout/fragment_add_payment" />
+
+    <fragment
+        android:id="@+id/createOrderFragment"
+        android:name="com.rayo.digitaldiary.ui.order.CreateOrderFragment"
+        android:label="Create Payment"
+        tools:layout="@layout/fragment_create_order" />
+
+    <fragment
+        android:id="@+id/generateQrCodeFragment"
+        android:name="com.rayo.digitaldiary.ui.customer.GenerateQrCodeFragment"
+        android:label="Generate Qr Code"
+        tools:layout="@layout/fragment_generate_qr_code" />
+
+    <fragment
+        android:id="@+id/ownerOrStaffOrderHistoryDetailFragment"
+        android:name="com.rayo.digitaldiary.ui.history.OwnerOrStaffHistoryDetailFragment"
+        android:label="Order History"
+        tools:layout="@layout/fragment_owner_or_staff_history_detail" />
+</navigation>

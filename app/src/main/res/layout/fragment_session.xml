@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="logoutPresenter"
+            type="com.rayo.digitaldiary.ui.profile.LogoutPresenter" />
+
+        <variable
+            name="sessionAdapter"
+            type="com.rayo.digitaldiary.ui.profile.SessionAdapter" />
+
+        <variable
+            name="currentSessionUserId"
+            type="String" />
+
+        <variable
+            name="isThisDeviceVisible"
+            type="Boolean" />
+
+        <variable
+            name="isOtherDeviceVisible"
+            type="Boolean" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvThisDevice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    term="@{@string/this_device}"
+                    android:padding="8dp"
+                    android:text="@string/this_device"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="@{isThisDeviceVisible?View.VISIBLE:View.GONE, default = gone}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <include
+                    android:id="@+id/layoutThisDevice"
+                    layout="@layout/item_login_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:visibility="@{isThisDeviceVisible?View.VISIBLE:View.GONE, default = gone}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvThisDevice"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/tvOtherDevice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
+                    term="@{@string/other_devices}"
+                    android:text="@string/other_devices"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="@{isOtherDeviceVisible?View.VISIBLE:View.GONE, default = gone}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layoutThisDevice"
+                    tools:visibility="visible" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOtherLoginDeviceList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:adapter="@{sessionAdapter}"
+                    android:nestedScrollingEnabled="false"
+                    android:padding="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tvOtherDevice"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_login_device"
+                    tools:visibility="visible" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLogout"
+                    style="@style/ButtonFilledElevatedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_horizontal"
+                    android:minHeight="0dp"
+                    android:onClick="@{()-> logoutPresenter.onLogoutAllDeviceClick(currentSessionUserId)}"
+                    android:padding="10dp"
+                    term="@{@string/logout_all_device}"
+                    android:text="@string/logout_all_device"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:visibility="@{isOtherDeviceVisible?View.VISIBLE:View.GONE, default = gone}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvOtherLoginDeviceList"
+                    tools:visibility="visible" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            style="@style/errorMessageStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{errorMessage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

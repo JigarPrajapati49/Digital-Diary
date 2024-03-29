@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="android.view.Gravity" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+
+        <variable
+            name="paymentAdapter"
+            type="com.rayo.digitaldiary.ui.payment.PaymentHistoryAdapter" />
+
+        <variable
+            name="paymentPresenter"
+            type="com.rayo.digitaldiary.ui.payment.PaymentHistoryPresenter" />
+
+        <variable
+            name="isProgressVisible"
+            type="Boolean" />
+
+        <variable
+            name="isRecyclerVisible"
+            type="Boolean" />
+
+        <variable
+            name="isCustomerVisible"
+            type="Boolean" />
+
+        <variable
+            name="isStaffVisible"
+            type="Boolean" />
+
+        <variable
+            name="isCustomer"
+            type="Boolean" />
+
+        <variable
+            name="isAddButtonVisible"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/tvPaymentDate"
+            term="@{@string/date}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guide1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/date" />
+
+        <TextView
+            android:id="@+id/tvCustomerName"
+            term="@{@string/customer_name}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPaymentDate"
+            android:visibility="@{isCustomerVisible?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toStartOf="@id/tvGivenName"
+            app:layout_constraintTop_toTopOf="@+id/tvPaymentDate"
+            app:layout_constraintStart_toEndOf="@id/guide1"
+            android:textAlignment="@{isStaffVisible?View.TEXT_ALIGNMENT_TEXT_START:View.TEXT_ALIGNMENT_CENTER}"
+            tools:visibility="visible"
+            tools:text="@string/customer_name" />
+
+        <TextView
+            android:id="@+id/tvGivenName"
+            term="@{@string/given_name}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:gravity="@{isCustomerVisible? Gravity.START: Gravity.CENTER}"
+            android:visibility="@{isStaffVisible?View.VISIBLE:View.GONE}"
+            android:textStyle="bold"
+            tools:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPaymentDate"
+            app:layout_constraintEnd_toStartOf="@id/tvAmount"
+            app:layout_constraintStart_toEndOf="@id/tvCustomerName"
+            app:layout_constraintTop_toTopOf="@+id/tvPaymentDate"
+            tools:text="@string/given_name" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            term="@{@string/amount}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tvPaymentDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guide3"
+            app:layout_constraintTop_toTopOf="@id/tvPaymentDate"
+            tools:text="@string/amount" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvPaymentDate, tvCustomerName, tvGivenName, tvAmount" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/paymentDetailDimen1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/paymentDetailDimen3" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHistory"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:adapter="@{paymentAdapter}"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:paddingBottom="?attr/actionBarSize"
+            android:visibility="@{isRecyclerVisible?View.VISIBLE:View.GONE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            tools:listitem="@layout/item_customer_payment_history" />
+
+        <ProgressBar
+            android:id="@+id/progressCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:visibility="@{isProgressVisible?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/rvHistory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            style="@style/errorMessageStyle"
+            term="@{errorMessage}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddPayment"
+            style="@style/ButtonFilledElevatedStyle"
+            term="@{@string/add_payment}"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:minHeight="0dp"
+            android:onClick="@{() -> paymentPresenter.onAddPaymentClick()}"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:visibility="@{isAddButtonVisible?View.VISIBLE:View.GONE}"
+            android:paddingBottom="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/add_payment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

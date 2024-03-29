@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "488748062564",
+    "project_id": "digital-diary-84b56",
+    "storage_bucket": "digital-diary-84b56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488748062564:android:b376e79fa38efb7a828c71",
+        "android_client_info": {
+          "package_name": "com.rayo.digitaldiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488748062564-5cq2dbpv33ifch9ndfnac0p5cfp7dpnq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rayo.digitaldiary",
+            "certificate_hash": "c46bd69c21951f18baa3d84f5884b450a9abcad1"
+          }
+        },
+        {
+          "client_id": "488748062564-crickk489a6f9kcclt6sunbl4593g4jg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rayo.digitaldiary",
+            "certificate_hash": "4fcd1e8a37c1b575406d1574935219a6611e72e8"
+          }
+        },
+        {
+          "client_id": "488748062564-pt2plss26v7kgub12aq7rl7pitfidfr7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rayo.digitaldiary",
+            "certificate_hash": "729988c812859fbdaffd8020319f73255362e4b3"
+          }
+        },
+        {
+          "client_id": "488748062564-lh2tiduj4jcllpl3o0530vo1kat1n9f6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs8-nHidjtAsdJKkSPGeeAB6zrnYYeBUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488748062564-6rvgeptpkf44t43sa6k71d416kqeaemo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "488748062564-2fcakeuho7sfcmkvhc3q7iuuqh2skq15.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rayo.digitaldiary"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

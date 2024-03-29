@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="totalRecordsOrder"
+            type="Integer" />
+
+        <variable
+            name="totalRecordsPayment"
+            type="Integer" />
+
+        <variable
+            name="unSyncRecordOrder"
+            type="Integer" />
+
+        <variable
+            name="unSyncRecordPayment"
+            type="Integer" />
+
+    </data>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TableRow android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                term="@{@string/table}"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="Table" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                term="@{@string/total_records}"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="Total Records" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                term="@{@string/unsynced_records}"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:text="Unsync Records" />
+        </TableRow>
+
+        <View
+            android:id="@+id/viewTable"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TableRow android:padding="5dp">
+
+            <TextView
+                term="@{@string/order}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                tools:text="Orders" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{totalRecordsOrder.toString()}"
+                android:textColor="@color/black"
+                tools:text="2256111" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{unSyncRecordOrder.toString()}"
+                android:textColor="@color/black"
+                tools:text="301" />
+        </TableRow>
+
+        <View
+            android:id="@+id/viewOrders"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TableRow android:padding="5dp">
+
+            <TextView
+                term="@{@string/payments}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                tools:text="Payments" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{totalRecordsPayment.toString()}"
+                android:textColor="@color/black"
+                tools:text="201" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{unSyncRecordPayment.toString()}"
+                android:textColor="@color/black"
+                tools:text="60" />
+        </TableRow>
+
+        <View
+            android:id="@+id/viewPayments"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </TableLayout>
+</layout>

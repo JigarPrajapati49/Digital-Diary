@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="reportPresenter"
+            type="com.rayo.digitaldiary.ui.report.ReportPresenter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.report.ReportActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/btnReportToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:checkedButton="@id/btnOrder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOrder"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/order}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:onClick="@{() -> reportPresenter.onOrderClick()}"
+                android:textColor="@color/toggle_text_colors"
+                android:textStyle="normal"
+                app:backgroundTint="@drawable/drawable_selector"
+                tools:text="@string/order" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReport"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/payments}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:onClick="@{() -> reportPresenter.onPaymentClick()}"
+                android:textColor="@color/toggle_text_colors"
+                android:textStyle="normal"
+                app:backgroundTint="@drawable/drawable_selector"
+                tools:text="@string/payments" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDue"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/due}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:onClick="@{() -> reportPresenter.onDueClick()}"
+                android:textColor="@color/toggle_text_colors"
+                android:textStyle="normal"
+                app:backgroundTint="@drawable/drawable_selector"
+                tools:text="@string/due" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentReportContainer"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnReportToggle"
+            app:navGraph="@navigation/nav_report"
+            tools:layout="@layout/fragment_order_report" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.rayo.digitaldiary.helper.Constants" />
+
+        <variable
+            name="paymentData"
+            type="com.rayo.digitaldiary.ui.payment.PaymentData" />
+
+        <variable
+            name="paymentPresenter"
+            type="com.rayo.digitaldiary.ui.payment.AddPaymentPresenter" />
+
+        <variable
+            name="duePaymentHistoryAdapter"
+            type="com.rayo.digitaldiary.ui.payment.DuePaymentHistoryAdapter" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+
+        <variable
+            name="isDueAmountListVisible"
+            type="Boolean" />
+
+        <variable
+            name="isDuePaymentListVisible"
+            type="Boolean" />
+
+        <variable
+            name="totalDueAmount"
+            type="Float" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputSelectCustomer"
+                    style="@style/textInputLayoutStyle"
+                    hintString="@{@string/select_customer}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:longClickable="false"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/ic_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etCustomer"
+                        style="@style/edittextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="true"
+                        android:hint="@string/select_customer"
+                        android:onClick="@{() -> paymentPresenter.onSelectCustomerClick()}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cardPaymentDue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border"
+                    android:visibility="@{isDueAmountListVisible?View.VISIBLE:View.GONE, default = visible}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/inputSelectCustomer">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPaymentDueAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adapter="@{duePaymentHistoryAdapter}"
+                        android:orientation="vertical"
+                        android:overScrollMode="never"
+                        android:paddingStart="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_due_payment_history" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvDueAmountLabel"
+                    term="@{(totalDueAmount &lt; 0f)?@string/prepaid_amount:@string/due_amount}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="@{isDuePaymentListVisible?View.VISIBLE:View.GONE}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardPaymentDue" />
+
+                <TextView
+                    android:id="@+id/tvDueAmount"
+                    currencySymbol="@{currencySymbol}"
+                    dueAmount="@{totalDueAmount}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="@{isDuePaymentListVisible?View.VISIBLE:View.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardPaymentDue" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputAmount"
+                    style="@style/textInputLayoutStyle"
+                    hintString="@{@string/amount}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:longClickable="false"
+                    app:layout_constraintTop_toBottomOf="@id/tvDueAmountLabel"
+                    app:startIconDrawable="@drawable/ic_currency"
+                    app:suffixText="@{currencySymbol}"
+                    app:suffixTextColor="@color/colorPrimary"
+                    tools:hint="@string/amount">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAmount"
+                        style="@style/edittextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="numberDecimal"
+                        android:maxLength="5"
+                        android:text="@={paymentData.amount}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tvPaymentMode"
+                    term="@{@string/payment_mode}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/inputAmount"
+                    tools:text="@string/payment_mode" />
+
+                <RadioGroup
+                    android:id="@+id/rgPaymentMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPaymentMode">
+
+                    <RadioButton
+                        android:id="@+id/radioCash"
+                        term="@{@string/cash}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="@{(paymentData.modeOfPayment == Constants.CASH)?true:false}"
+                        app:buttonTint="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:checked="true"
+                        tools:text="@string/cash" />
+
+                    <RadioButton
+                        android:id="@+id/radioOnline"
+                        term="@{@string/online}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:checked="@{(paymentData.modeOfPayment == Constants.ONLINE)?true:false}"
+                        app:buttonTint="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="@id/radioActive"
+                        app:layout_constraintStart_toEndOf="@id/radioActive"
+                        app:layout_constraintTop_toTopOf="@id/radioActive"
+                        tools:text="@string/online" />
+
+                </RadioGroup>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputNote"
+                    style="@style/textInputLayoutStyle"
+                    hintString="@{@string/notes}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rgPaymentMode"
+                    app:startIconDrawable="@drawable/ic_notes"
+                    tools:hint="@string/notes">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNote"
+                        style="@style/edittextStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|start"
+                        android:imeOptions="actionDone"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:minLines="2"
+                        android:text="@={paymentData.note}"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
+                    style="@style/ButtonOutlineStyle"
+                    term="@{@string/cancel}"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:onClick="@{() -> paymentPresenter.onCancelClick()}"
+                    app:layout_constraintEnd_toStartOf="@id/btnAdd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/inputNote"
+                    tools:text="@string/cancel" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAdd"
+                    style="@style/ButtonFilledElevatedStyle"
+                    term="@{@string/add}"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="4dp"
+                    android:onClick="@{() -> paymentPresenter.onAddPaymentClick(paymentData)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnCancel"
+                    app:layout_constraintTop_toTopOf="@id/btnCancel"
+                    tools:text="@string/add" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

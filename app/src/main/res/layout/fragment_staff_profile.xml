@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="profilePresenter"
+            type="com.rayo.digitaldiary.ui.profile.StaffProfilePresenter" />
+
+        <variable
+            name="profileData"
+            type="com.rayo.digitaldiary.ui.staff.StaffData" />
+
+        <variable
+            name="countryCode"
+            type="String" />
+
+        <variable
+            name="isEditVisible"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnCardEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:cardElevation="5dp"
+            android:visibility="@{isEditVisible?View.VISIBLE:View.GONE}"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="4dp"
+            android:onClick="@{()->profilePresenter.onEditClick(profileData)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/ic_edit" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvLabelStaffName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            term="@{@string/name}"
+            app:layout_constraintEnd_toStartOf="@+id/tvStaffName"
+            tools:text="@string/name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnCardEditProfile" />
+
+        <TextView
+            android:id="@+id/tvStaffName"
+            android:layout_width="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelStaffName"
+            android:textColor="@color/blackNormal"
+            term="@{(profileData.name.empty ==true)?`--`:profileData.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvLabelStaffName" />
+
+        <View
+            android:id="@+id/viewDividerBusinessName"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStaffName" />
+
+        <TextView
+            android:id="@+id/tvLabelPhoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="@string/phone_number"
+            term="@{@string/phone_number}"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tvPhoneNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewDividerBusinessName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPhoneNumber"
+            android:layout_width="0dp"
+            android:layout_marginStart="10dp"
+            android:gravity="end"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelPhoneNumber"
+            android:layout_height="wrap_content"
+            android:text="@{(profileData.contactNumber.empty ==true)?`--`:countryCode+` `+profileData.contactNumber}"
+            android:textColor="@color/blackNormal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvLabelPhoneNumber" />
+
+        <View
+            android:id="@+id/viewDividerPhoneNumber"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber" />
+
+        <TextView
+            android:id="@+id/tvLabelEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/tvEmail"
+            android:layout_marginTop="16dp"
+            tools:text="@string/email"
+            term="@{@string/email}"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewDividerPhoneNumber" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintStart_toEndOf="@+id/tvLabelEmail"
+            term="@{(profileData.email.empty == true)?`--`:profileData.email}"
+            android:textColor="@color/blackNormal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvLabelEmail" />
+
+        <View
+            android:id="@+id/viewDividerEmail"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvEmail" />
+
+        <TextView
+            android:id="@+id/tvLoginDevices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp"
+            term="@{@string/sessions}"
+            tools:text="@string/sessions"
+            android:onClick="@{()-> profilePresenter.onLoginDevicesClick(profileData.id)}"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/viewDividerEmail"
+            app:drawableEndCompat="@drawable/ic_round_arrow_right" />
+
+        <View
+            android:id="@+id/viewDividerDevices"
+            style="@style/dividerViewStyle"
+            android:layout_marginTop="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLoginDevices" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="productData"
+            type="com.rayo.digitaldiary.ui.product.Product" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+        <variable
+            name="productUnit"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_optimizationLevel="none"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:paddingTop="12dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/historyDetailDimen1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/historyDetailDimen2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/historyDetailDimen3" />
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{productData.name}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@id/guide40"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product Name" />
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{Integer.parseInt(productData.quantity)+``}"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@id/tvUnit"
+            app:layout_constraintStart_toStartOf="@id/guide40"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="5" />
+
+        <TextView
+            android:id="@+id/tvUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{productData.weight+` `+productUnit}"
+            android:textColor="@color/blackNormal"
+            app:layout_constraintEnd_toStartOf="@id/guide80"
+            app:layout_constraintStart_toStartOf="@id/guide60"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="100 liter" />
+
+        <TextView
+            android:id="@+id/tvPriceSymbol"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{currencySymbol}"
+            app:layout_constraintWidth_default="wrap"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toStartOf="@id/tvPrice"
+            app:layout_constraintStart_toEndOf="@id/guide80"
+            app:layout_constraintTop_toTopOf="@id/tvProductName"
+            tools:text="$" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            price="@{productData.price}"
+            quantity="@{productData.quantity}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            app:layout_constraintWidth_default="spread"
+            android:textColor="@color/blackNormal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvPriceSymbol"
+            app:layout_constraintTop_toTopOf="@id/tvProductName"
+            tools:text="50000" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvProductName, tvQuantity, tvUnit, tvPriceSymbol, tvPrice" />
+
+        <View
+            style="@style/dividerViewStyle"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

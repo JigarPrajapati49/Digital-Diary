@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/filterGroup"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/filterAll"
+            android:title="@string/all" />
+
+        <item
+            android:id="@+id/filterCompleted"
+            android:title="@string/completed" />
+
+        <item
+            android:id="@+id/filterCancelled"
+            android:title="@string/cancelled" />
+
+    </group>
+</menu>

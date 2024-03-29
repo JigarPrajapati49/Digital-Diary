@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuProfile"
+    app:startDestination="@id/profileFragment">
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.OwnerProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_sessionFragment"
+            app:destination="@id/sessionFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sessionFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.SessionFragment"
+        android:label="Session"
+        tools:layout="@layout/fragment_session" />
+
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="com.rayo.digitaldiary.ui.settings.DeleteAccountFragment"
+        android:label="@string/delete_account"
+        tools:layout="@layout/fragment_delete_account"/>
+</navigation>

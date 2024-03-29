@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuSettings"
+    app:startDestination="@id/settingsFragment">
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.rayo.digitaldiary.ui.settings.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_ownerProfileFragment"
+            app:destination="@+id/profileFragment"
+            app:popUpTo="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_sessionFragment"
+            app:destination="@+id/sessionFragment"
+            app:popUpTo="@id/profileFragment" />
+        <action
+            android:id="@+id/action_staffDetailsFragment_to_troubleshootingFragment"
+            app:destination="@id/troubleShootingFragment"
+            app:popUpTo="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.rayo.digitaldiary.ui.settings.NotificationFragment"
+        android:label="@string/notification"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.rayo.digitaldiary.ui.settings.ResetPasswordFragment"
+        android:label="@string/change_password"
+        tools:layout="@layout/fragment_reset_password" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.OwnerProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/sessionFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.SessionFragment"
+        android:label="@string/sessions"
+        tools:layout="@layout/fragment_session" />
+
+    <fragment
+        android:id="@+id/staffProfileFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.StaffProfileFragment"
+        android:label="@string/staff_profile"
+        tools:layout="@layout/fragment_staff_profile">
+        <action
+            android:id="@+id/action_staff_profile_to_staff_login_detail"
+            app:destination="@id/staffLoginDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/staffLoginDetailFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.SessionFragment"
+        android:label="staff_login_detail"
+        tools:layout="@layout/fragment_session" />
+
+    <fragment
+        android:id="@+id/customerProfileFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.CustomerProfileFragment"
+        android:label="@string/customer_profile"
+        tools:layout="@layout/fragment_customer_profile">
+        <action
+            android:id="@+id/action_customerHomeFragment_to_customer_login_detail"
+            app:destination="@id/customerLoginDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/customerLoginDetailFragment"
+        android:name="com.rayo.digitaldiary.ui.profile.SessionFragment"
+        android:label="staff_login_detail"
+        tools:layout="@layout/fragment_session" />
+
+    <fragment
+        android:id="@+id/troubleShootingFragment"
+        android:name="com.rayo.digitaldiary.ui.settings.TroubleShootingFragment"
+        android:label="staff_login_detail"
+        tools:layout="@layout/fragment_trouble_shooting" />
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="com.rayo.digitaldiary.ui.settings.DeleteAccountFragment"
+        android:label="@string/delete_account"
+        tools:layout="@layout/fragment_delete_account" />
+</navigation>

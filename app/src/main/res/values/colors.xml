@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#07689F</color>
+    <color name="colorPrimaryDark">#07689F</color>
+    <color name="colorAccent">#989EAB</color>
+    <color name="black">#000000</color>
+    <color name="blackNormal">#A6000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorGrey">@color/colorAccent</color>
+    <color name="colorBackground">#F6F6F6</color>
+
+    <color name="colorBlackTransparent">#22000000</color>
+    <color name="colorRed">#F44336</color>
+    <color name="buttonRippleColor">#CC07689F</color>
+    <color name="colorLine">@color/blackNormal</color>
+    <color name="colorBottomNavigationSelected">@color/colorPrimary</color>
+    <color name="colorBottomNavigationUnselected">@color/colorAccent</color>
+    <color name="colorSelectedBackground">#EDEDED</color>
+    <color name="colorGreen">#4CAF50</color>
+</resources>

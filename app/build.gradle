@@ -1,0 +1,119 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace 'com.rayo.digitaldiary'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.rayo.digitaldiary"
+        minSdk 23
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [crashlyticsEnabled: "true"]
+            buildConfigField "String", "BASE_URL", "\"https://api.digital-diary.rayoinnovations.com/\""
+        }
+        debug {
+            manifestPlaceholders = [crashlyticsEnabled: "false"]
+            buildConfigField "String", "BASE_URL", "\"https://api.digital-diary.rayoinnovations.com/\""
+        }
+        debugLive{
+            initWith(buildTypes.debug)
+            buildConfigField "String", "BASE_URL", "\"https://api.digital-diary.rayoinnovations.com/\""
+        }
+    }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.activity:activity-ktx:1.4.0-alpha01'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    /* navigation graph */
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+    /* Viewmodel */
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+    /* Hilt dependency injection */
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    /* coroutines for bg thread work */
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
+    // Retrofit and GSON
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+    /* to load Image */
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+
+    /* Google login */
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
+    /* Generate QR code */
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+    /*Room database*/
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    /*Phone Number and Country Code  */
+    implementation 'com.hbb20:ccp:2.5.0'
+    //adding paging
+    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+    /* One signal */
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+    /* View more & View less */
+    implementation "com.webtoonscorp.android:readmore-view:1.3.2"
+    /* ViewPager */
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation(platform("com.google.firebase:firebase-bom:30.0.2"))
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+}

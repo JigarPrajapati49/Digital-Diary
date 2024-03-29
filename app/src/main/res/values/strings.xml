@@ -1,0 +1,307 @@
+<resources>
+    <string name="app_name">Digital Diary</string>
+    <string name="no_internet">no_internet</string>
+    <string name="sync_Success">sync_Success</string>
+    <string name="syncing_data">syncing_data</string>
+    <string name="translating_data">Please wait a while we are translating your data…</string>
+    <string name="your_data_is_not_sync_tap_here">your_data_is_not_sync_tap_here</string>
+
+    <!-- Register/Login start -->
+    <string name="register">register</string>
+    <string name="register_business">register_business</string>
+    <string name="business_name">business_name</string>
+    <string name="phone_number">phone_number</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="sign_in">sign_in</string>
+    <string name="sign_in_businessAccount">sign_in_businessAccount</string>
+    <string name="or">or</string>
+    <string name="forgot_password">forgot_password</string>
+    <string name="forget_password">forget_password</string>
+    <string name="enter_email">enter_email</string>
+    <string name="enter_valid_contact_number">enter_valid_contact_number</string>
+    <string name="enter_contact_countryCode">enter_contact_countryCode</string>
+    <string name="enter_contact_iso_code">enter_contact_iso_code</string>
+    <string name="invalid_email">invalid_email</string>
+    <string name="enter_address">enter_address</string>
+    <string name="email_already_exist">email_already_exist</string>
+    <string name="enter_password">enter_password</string>
+    <string name="sign_in_with_google">sign_in_with_google</string>
+    <string name="not_a_member">not_a_member</string>
+    <string name="register_now">register_now</string>
+    <string name="login_guide">login_guide</string>
+    <string name="enter_name">enter_name</string>
+    <string name="enter_business_name">enter_business_name</string>
+    <string name="enter_valid_password">enter_valid_password</string>
+    <string name="enter_otp">enter_otp</string>
+    <string name="enter_confirm_password">enter_confirm_password</string>
+    <string name="password_and_confirm_password">password_and_confirm_password</string>
+    <string name="new_password">new_password</string>
+    <string name="old_password">old_password</string>
+    <string name="enter_old_password">enter_old_password</string>
+    <string name="enter_new_password">enter_new_password</string>
+    <string name="verify_otp_description">verify_otp_description</string>
+    <string name="enter_verification_code">enter_verification_code</string>
+    <string name="confirm_password">confirm_password</string>
+    <string name="verify_otp">verify_otp</string>
+    <string name="resend_otp">resend_otp</string>
+    <string name="update">update</string>
+    <string name="resent_otp_time"> :00:%1$s</string>
+    <string name="logout_confirmation">logout_alert</string>
+    <string name="complete_business_registration">complete_business_registration</string>
+    <string name="already_register">already_registered</string>
+    <string name="phone_number_optional">phone_number_optional</string>
+    <string name="address_optional">address_optional</string>
+    <string name="no_internet_dialog">Please turn on internet connection to continue</string>
+    <string name="success_logout">success_logout</string>
+    <string name="otp_verified">otp_verified</string>
+    <string name="invalid_qr_code">invalid_qr_code</string>
+    <!-- Register/Login end-->
+
+    <!--Common start-->
+    <string name="ok">ok</string>
+    <string name="cancel">cancel</string>
+    <string name="submit">submit</string>
+    <string name="allow">allow</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="read_more">read_more</string>
+    <string name="read_less">read_less</string>
+    <!--Common end-->
+
+    <!-- Bottom menu start-->
+    <string name="dashboard">dashboard</string>
+    <string name="profile">profile</string>
+    <string name="product">product</string>
+    <string name="settings">settings</string>
+    <string name="business">business</string>
+    <string name="contact_us">contact_us</string>
+    <!-- Bottom menu End-->
+
+    <!--Product start-->
+    <string name="unit">unit</string>
+    <string name="price">price</string>
+    <string name="weight">weight</string>
+    <string name="product_price">₹</string>
+    <string name="active">active</string>
+    <string name="all">all</string>
+    <string name="quantity">quantity</string>
+    <string name="inactive">inactive</string>
+    <string name="add_product">add_product</string>
+    <string name="products">products</string>
+    <string name="total_product">total_product</string>
+    <string name="product_name">product_name</string>
+    <string name="product_status">product_status</string>
+    <string name="select_unit">select_unit</string>
+    <string name="add">add</string>
+    <string name="enter_product">enter_product</string>
+    <string name="enter_weight">enter_weight</string>
+    <string name="weight_should_be_greater_than_zero">weight_should_be_greater_than_zero</string>
+    <string name="price_should_be_greater_than_zero">price_should_be_greater_than_zero</string>
+    <string name="enter_unit">enter_unit</string>
+    <string name="enter_price">enter_price</string>
+    <string name="enter_product_status">enter_product_status</string>
+    <string name="no_product">no_product</string>
+    <string name="update_product">update_product</string>
+    <string name="select_currency">select_currency</string>
+    <string name="no_country">no_country</string>
+    <!--Product end-->
+
+    <!-- Staff Start -->
+    <string name="name">name</string>
+    <string name="email_optional">email_optional</string>
+    <string name="staff_status">staff_status</string>
+    <string name="staff">staff</string>
+    <string name="add_staff">add_staff</string>
+    <string name="update_staff">update_staff</string>
+    <string name="staff_profile">staff_profile</string>
+    <string name="no_staff">no_staff</string>
+    <string name="update_profile">update_profile</string>
+    <string name="currency">currency</string>
+    <string name="currency_symbol">currency_symbol</string>
+    <string name="search">search</string>
+    <!-- Staff End -->
+
+    <!-- Setting Start -->
+    <string name="select_language">select_language</string>
+    <string name="no_language_found">no_language_found</string>
+    <!-- Setting End -->
+
+    <!-- Customer Start -->
+    <string name="customer">customer</string>
+    <string name="home">home</string>
+    <string name="due_prepaid_amount">due_prepaid_amount</string>
+    <string name="by_registered">by_registered</string>
+    <string name="due_ascending">due_ascending</string>
+    <string name="due_descending">due_descending</string>
+    <string name="a_to_z">a_to_z</string>
+    <string name="z_to_a">z_to_a</string>
+    <string name="add_customer">add_customer</string>
+    <string name="update_customer">update_customer</string>
+    <string name="customer_status">customer_status</string>
+    <string name="address">address</string>
+    <string name="customer_profile">customer_profile</string>
+    <string name="no_customer">no_customer</string>
+    <string name="qr_guide">qr_guide</string>
+    <string name="generate_qr">generate_qr</string>
+    <string name="customer_current_business">customer_current_business</string>
+    <string name="customer_history">customer_history</string>
+    <!-- Customer End -->
+
+    <!-- Dashboard Start -->
+    <string name="total_staff">total_staff</string>
+    <string name="customers">Customers</string>
+    <string name="owner_detail">owner_detail</string>
+    <string name="create_order">create_order</string>
+    <string name="update_order">update_order</string>
+    <!-- Dashboard End -->
+
+    <!-- Create order -->
+    <string name="select_customer">select_customer</string>
+    <string name="select_product">select_product</string>
+    <string name="payment_status">payment_status</string>
+    <string name="order_status">order_status</string>
+    <string name="done">Done</string>
+    <string name="order_amount">order_amount</string>
+    <string name="date">date</string>
+    <string name="start_date">start_date</string>
+    <string name="end_date">end_date</string>
+    <string name="select">select</string>
+    <string name="create">create</string>
+    <string name="please_select_order_date">please_select_order_date</string>
+    <string name="please_select_customer">please_select_customer</string>
+    <string name="please_select_Product">please_select_Product</string>
+    <string name="order_amount_error">order_amount_error</string>
+    <string name="select_date">select_date</string>
+    <string name="no_customer_found">no_customer_found</string>
+    <string name="no_product_found">no_product_found</string>
+    <string name="order_created">order_created</string>
+    <string name="order_update">order_update</string>
+    <string name="history">history</string>
+    <string name="customer_name">customer_name</string>
+    <string name="order_history">order_history</string>
+    <string name="owner_details">owner_details</string>
+    <string name="retry">Retry</string>
+    <string name="cancel_order">cancel_order</string>
+    <string name="no_data_found">no_data_found</string>
+    <string name="no_order_created">no_order_created</string>
+    <string name="cancel_order_confirmation">cancel_order_conformation</string>
+    <string name="note">note</string>
+    <string name="confirm_order_details">confirm_order_details</string>
+
+    <!-- History -->
+    <string name="status">status</string>
+    <string name="filter">filter</string>
+    <string name="apply">apply</string>
+    <string name="call">call</string>
+    <string name="message">message</string>
+    <string name="copy">copy</string>
+    <string name="copied_to_clipboard">copied_to_clipboard</string>
+    <string name="created_by">created_by</string>
+    <string name="order_date">order_date</string>
+    <string name="product_details">product_details</string>
+    <string name="clear">clear</string>
+    <string name="date_default">date_default</string>
+    <string name="date_ascending">date_ascending</string>
+    <string name="date_descending">date_descending</string>
+    <string name="cancelled_date">cancelled_date</string>
+    <string name="cancelled_by_name">cancelled_by_name</string>
+    <string name="notes">notes</string>
+    <string name="cancelled">cancelled</string>
+    <string name="completed">completed</string>
+    <string name="monthly_total_amount">monthly_total_amount</string>
+    <string name="monthly_paid_amount">monthly_paid_amount</string>
+    <string name="total_credited_or_pending_amount">total_credited_or_pending_amount</string>
+    <string name="created_at">created_at</string>
+    <string name="time">time</string>
+    <string name="cancel_reason">cancel_reason</string>
+    <string name="cancel_reason_hint">cancel_reason_hint</string>
+
+    <!-- Settings -->
+    <string name="language">language</string>
+    <string name="notification">notification</string>
+    <string name="sync_data">sync_data</string>
+    <string name="logout">logout</string>
+    <string name="logout_from_all_business">logout_from_all_business</string>
+    <string name="logout_all_device">logout_from_all_device</string>
+    <string name="change_password">change_password</string>
+    <string name="delete_account">delete_account</string>
+    <string name="version">version</string>
+
+    <!-- Add Payment -->
+    <string name="payments">payments</string>
+    <string name="add_payment">add_payment</string>
+    <string name="amount">amount</string>
+    <string name="please_enter_amount">please_enter_amount</string>
+    <string name="amount_should_be_greater_than_zero">amount_should_be_greater_than_zero</string>
+    <string name="payment_added">payment_added</string>
+    <string name="payment_history">payment_history</string>
+    <string name="given_name">given_name</string>
+    <string name="payment_mode">payment_mode</string>
+    <string name="cash">cash</string>
+    <string name="online">online</string>
+    <string name="due_amount">due_amount</string>
+    <string name="prepaid_amount">prepaid_amount</string>
+    <string name="confirm_payment_message">confirm_payment_message</string>
+    <string name="confirm">confirm</string>
+    <string name="confirm_payment">confirm_payment</string>
+    <string name="payment_date_range">payment_date_range</string>
+    <string name="select_start_date">select_start_date</string>
+    <string name="select_end_date">select_end_date</string>
+
+    <!-- report -->
+    <string name="report">report</string>
+    <string name="order">order</string>
+    <string name="daily">daily</string>
+    <string name="monthly">monthly</string>
+    <string name="yearly">yearly</string>
+    <string name="total_orders">total_orders</string>
+    <string name="total_earned">total_earned</string>
+    <string name="total_completed_orders">total_completed_orders</string>
+    <string name="total_amount">total_amount</string>
+    <string name="total_due_amount">total_due_amount</string>
+    <string name="sessions">sessions</string>
+    <string name="total_payments">total_payments</string>
+    <string name="due">due</string>
+    <string name="generate_qr_code">generate_qr_code</string>
+    <string name="re_generate_qr_code">re_generate_qr_code</string>
+
+    <!--Session-->
+    <string name="last_used">last_used</string>
+    <string name="this_device">this_device</string>
+    <string name="other_devices">other_devices</string>
+    <string name="no_login_devices_found">no_login_devices_found</string>
+    <string name="today">today</string>
+    <string name="yesterday">yesterday</string>
+    <string name="days">days</string>
+    <string name="week">week</string>
+    <string name="weeks">weeks</string>
+    <string name="month">month</string>
+    <string name="months">months</string>
+    <string name="year">year</string>
+    <string name="years">years</string>
+    <string name="ago">ago</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="ten">10</string>
+    <string name="eleven">11</string>
+
+    <!-- Notification -->
+    <string name="payment_received">payment_received</string>
+    <string name="payment_details">payment_details</string>
+    <string name="added_by">added_by</string>
+    <string name="permission_required">permission_required</string>
+    
+    <!-- TroubleShooting -->
+    <string name="troubleshoot">troubleshoot</string>
+    <string name="total_records">total_records</string>
+    <string name="unsynced_records">unsynced_records</string>
+    <string name="table">table</string>
+</resources>

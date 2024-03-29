@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menuOrderReport"
+    app:startDestination="@id/orderReportFragment">
+
+    <fragment
+        android:id="@+id/orderReportFragment"
+        android:name="com.rayo.digitaldiary.ui.report.OrderReportFragment"
+        android:label="@string/report"
+        tools:layout="@layout/fragment_order_report" />
+
+    <fragment
+        android:id="@+id/paymentReportFragment"
+        android:name="com.rayo.digitaldiary.ui.report.PaymentReportFragment"
+        android:label="@string/report"
+        tools:layout="@layout/fragment_payment_report" />
+
+    <fragment
+        android:id="@+id/paymentDueFragment"
+        android:name="com.rayo.digitaldiary.ui.report.DueReportFragment"
+        android:label="@string/report"
+        tools:layout="@layout/fragment_due_report" />
+</navigation>

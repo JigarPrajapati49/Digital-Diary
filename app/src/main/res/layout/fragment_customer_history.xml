@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="historyPresenter"
+            type="com.rayo.digitaldiary.ui.history.CustomerHistoryPresenter" />
+
+        <variable
+            name="orderHistoryData"
+            type="com.rayo.digitaldiary.ui.order.OrderData" />
+
+        <variable
+            name="isImageNextEnable"
+            type="Boolean" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+
+        <variable
+            name="isNoOrderHistoryFound"
+            type="Boolean" />
+
+        <variable
+            name="customerHistoryAdapter"
+            type="com.rayo.digitaldiary.ui.history.CustomerOrderHistoryAdapter" />
+
+        <variable
+            name="summaryData"
+            type="com.rayo.digitaldiary.ui.history.CustomerHistorySummaryData" />
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintHistorySummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:padding="12dp"
+            tools:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvTotalOrdersLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                term="@{@string/total_completed_orders}"
+                tools:text="@string/total_completed_orders"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@id/tvTotalOrders"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTotalAmountLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                term="@{@string/total_amount}"
+                tools:text="@string/total_amount"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@id/tvTotalAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalOrdersLabel" />
+
+            <TextView
+                android:id="@+id/tvPendingAmountLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                term="@{@string/total_due_amount}"
+                tools:text="@string/total_due_amount"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toStartOf="@id/tvPendingAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalAmount" />
+
+            <TextView
+                android:id="@+id/tvTotalOrders"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@{summaryData.totalOrders}"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTotalOrdersLabel"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:text="@{summaryData.totalAmount}"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTotalAmountLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalOrders"/>
+
+            <TextView
+                android:id="@+id/tvPendingAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                currencySymbol="@{currencySymbol}"
+                dueAmount="@{summaryData.totalDueAmount}"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvPendingAmountLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalAmount" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMonthSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_goneMarginTop="0dp"
+            app:layout_constraintTop_toBottomOf="@id/constraintHistorySummary">
+
+            <ImageView
+                android:id="@+id/imgPrevMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> historyPresenter.onPreviousMonthClick()}"
+                android:paddingStart="18dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_previous"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/tvMonthName"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:paddingStart="12dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imgNextMonth"
+                app:layout_constraintStart_toEndOf="@id/imgPrevMonth"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Month Name" />
+
+            <ImageView
+                android:id="@+id/imgNextMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="@{isImageNextEnable}"
+                android:focusable="@{isImageNextEnable}"
+                android:onClick="@{() -> historyPresenter.onNextMonthClick()}"
+                android:paddingStart="12dp"
+                android:paddingTop="18dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="18dp"
+                android:alpha="@{isImageNextEnable?1.0f:0.2f}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_next"
+                app:tint="@color/black" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/customerHistoryDimen1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/customerHistoryDimen2" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constrainHistoryDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border"
+            android:padding="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clMonthSwitch">
+
+
+            <TextView
+                android:id="@+id/tvMonthlyTotalAmountLabel"
+                term="@{@string/monthly_total_amount}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvMonthlyTotalAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/monthly_total_amount" />
+
+            <TextView
+                android:id="@+id/tvMonthlyTotalAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/blackNormal"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvMonthlyTotalAmountLabel"
+                app:layout_constraintTop_toTopOf="@+id/constrainHistoryDetails" />
+
+            <TextView
+                android:id="@+id/tvMonthlyPaidAmountLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                term="@{@string/monthly_paid_amount}"
+                app:layout_constraintEnd_toStartOf="@+id/tvMonthlyPaidAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMonthlyTotalAmount"
+                tools:text="@string/monthly_paid_amount" />
+
+            <TextView
+                android:id="@+id/tvMonthlyPaidAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/blackNormal"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvMonthlyPaidAmountLabel"
+                app:layout_constraintTop_toTopOf="@+id/tvMonthlyPaidAmountLabel" />
+
+            <TextView
+                android:id="@+id/tvTotalCreditOrPendingAmountLabel"
+                term="@{@string/total_credited_or_pending_amount}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvTotalCreditOrPendingAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMonthlyPaidAmount"
+                tools:text="@string/total_credited_or_pending_amount" />
+
+            <TextView
+                android:id="@+id/tvTotalCreditOrPendingAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@color/blackNormal"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvTotalCreditOrPendingAmountLabel"
+                app:layout_constraintTop_toTopOf="@+id/tvTotalCreditOrPendingAmountLabel" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvOrderDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/date"
+            term="@{@string/date}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constrainHistoryDetails" />
+
+        <TextView
+            android:id="@+id/tvPaymentStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            tools:text="@string/status"
+            term="@{@string/status}"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/guide85"
+            app:layout_constraintStart_toEndOf="@id/guide20"
+            app:layout_constraintTop_toTopOf="@id/tvOrderDate" />
+
+        <TextView
+            android:id="@+id/tvOrderAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            tools:text="@string/order_amount"
+            android:textColor="@color/black"
+            term="@{@string/order_amount}"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guide85"
+            app:layout_constraintTop_toTopOf="@id/tvOrderDate" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvPaymentStatus, tvOrderAmount" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHistory"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:orientation="vertical"
+            android:adapter="@{customerHistoryAdapter}"
+            android:paddingBottom="?attr/actionBarSize"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            tools:listitem="@layout/item_customer_history_offline" />
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            style="@style/errorMessageStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{errorMessage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNoDataFount"
+            style="@style/errorMessageStyle"
+            term="@{@string/no_data_found}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{isNoOrderHistoryFound?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/no_data_found" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

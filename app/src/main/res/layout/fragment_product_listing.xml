@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="productPresenter"
+            type="com.rayo.digitaldiary.ui.product.ProductPresenter" />
+
+        <variable
+            name="productAdapter"
+            type="com.rayo.digitaldiary.ui.product.ProductAdapter" />
+
+        <variable
+            name="errorMessage"
+            type="String" />
+
+        <variable
+            name="editVisibility"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp">
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:checkedButton="@id/btnActive"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnActive"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/active}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:onClick="@{() -> productPresenter.onActiveClick()}"
+                android:textColor="@color/toggle_text_colors"
+                android:textStyle="normal"
+                app:backgroundTint="@drawable/drawable_selector"
+                tools:text="@string/active" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnInactive"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/inactive}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:onClick="@{() -> productPresenter.onInactiveClick()}"
+                android:textColor="@color/toggle_text_colors"
+                android:textStyle="normal"
+                app:backgroundTint="@drawable/drawable_selector"
+                tools:text="@string/inactive" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAll"
+                style="@style/ButtonOutlineStyle"
+                term="@{@string/all}"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minHeight="0dp"
+                android:onClick="@{() -> productPresenter.onAllClick()}"
+                android:padding="6dp"
+                android:textColor="@color/toggle_text_colors"
+                android:textStyle="normal"
+                app:backgroundTint="@drawable/drawable_selector"
+                tools:text="@string/all" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddProduct"
+            style="@style/ButtonFilledElevatedStyle"
+            term="@{@string/add_product}"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:minHeight="0dp"
+            android:onClick="@{() -> productPresenter.onAddProductClick()}"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:textColor="@color/white"
+            android:visibility="@{editVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/add_product" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/productDimen1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/productDimen2" />
+
+        <TextView
+            android:id="@+id/textName"
+            term="@{@string/name}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggleGroup"
+            tools:text="@string/product" />
+
+        <TextView
+            android:id="@+id/textQuantity"
+            term="@{@string/quantity}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/guide50"
+            app:layout_constraintTop_toBottomOf="@id/toggleGroup"
+            tools:text="@string/quantity" />
+
+        <TextView
+            android:id="@+id/textPrice"
+            term="@{@string/price}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/guide80"
+            app:layout_constraintTop_toBottomOf="@+id/toggleGroup"
+            tools:text="@string/price" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/dividerViewStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textName" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProduct"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:adapter="@{productAdapter}"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            android:paddingBottom="?attr/actionBarSize"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            tools:itemCount="30"
+            tools:listitem="@layout/item_product" />
+
+        <TextView
+            android:id="@+id/tvErrorMessage"
+            style="@style/errorMessageStyle"
+            term="@{errorMessage}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

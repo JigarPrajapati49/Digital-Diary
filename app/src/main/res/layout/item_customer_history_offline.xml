@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="customerWithHistory"
+            type="com.rayo.digitaldiary.database.CustomerWithHistory" />
+
+
+        <variable
+            name="historyPresenter"
+            type="com.rayo.digitaldiary.ui.history.HistoryPresenter" />
+
+
+        <variable
+            name="currencySymbol"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{() -> historyPresenter.onHistoryItemClick(customerWithHistory)}">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/customerHistoryDimen1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="@dimen/customerHistoryDimen2" />
+
+        <TextView
+            android:id="@+id/tvOrderDate"
+            date="@{customerWithHistory.orderData.orderDate}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@id/guide20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="23-5-2023" />
+
+        <TextView
+            android:id="@+id/tvPaymentStatus"
+            term="@{(customerWithHistory.orderData.cancelled == 1)?@string/cancelled:@string/completed}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@{(customerWithHistory.orderData.cancelled == 1)?@color/colorRed:@color/colorPrimary}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guide85"
+            app:layout_constraintStart_toEndOf="@id/guide20"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Completed" />
+
+        <TextView
+            android:id="@+id/tvPriceSymbol"
+            term="@{currencySymbol}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toEndOf="@id/guide85"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            term="@{customerWithHistory.orderData.orderAmount}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/blackNormal"
+            app:layout_constraintEnd_toStartOf="@id/imgNext"
+            app:layout_constraintStart_toEndOf="@id/tvPriceSymbol"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="500" />
+
+        <ImageView
+            android:id="@+id/imgNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/tvAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvAmount" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvOrderDate, tvPaymentStatus, tvAmount" />
+
+        <View
+            android:id="@+id/view"
+            style="@style/dividerViewStyle"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
